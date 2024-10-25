@@ -22,7 +22,7 @@ const SignInSignUp = ({ onSignIn, onSignUp }: AuthPageProps) => {
     if (isSignIn) {
       onSignIn(email, password);
     } else {
-      onSignUp(email, password, name, avatar);
+      onSignUp(name, email, password, avatar);
     }
   };
 

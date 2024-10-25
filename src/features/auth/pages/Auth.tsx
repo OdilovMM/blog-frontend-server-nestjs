@@ -1,16 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SignInSignUp from '../components/SignInSignUp';
-
-const handleSignIn = async (email: string, password: string) => {};
-
-const handleSignUp = async (
-  name: string,
-  email: string,
-  password: string,
-  avatar: string
-) => {};
+import { useSignInMutation, useSignUpMutation } from '../api/authApi';
+import { enqueueSnackbar } from 'notistack';
 
 const Auth = () => {
+  const [signIn, { isSuccess: signedIn }] = useSignInMutation();
+  const [signUp, { isSuccess: signedUp }] = useSignUpMutation();
+
+  const handleSignIn = async (email: string, password: string) => {
+    await signIn({ email, password });
+  };
+
+  const handleSignUp = async (
+    name: string,
+    email: string,
+    password: string,
+    avatar: string
+  ) => {
+    await signUp({ name, email, password, avatar });
+  };
+
+  useEffect(() => {
+    if (signedIn) {
+      enqueueSnackbar('User signed in', { variant: 'success' });
+    }
+    if (signedUp) {
+      enqueueSnackbar('User signed up', { variant: 'success' });
+    }
+  }, [signedIn, signedUp]);
+
   return (
     <div className="auth">
       <SignInSignUp onSignIn={handleSignIn} onSignUp={handleSignUp} />
