@@ -3,6 +3,7 @@ export type UserDto = {
     name: string;
     email: string;
     roles: string[];
+    avatar: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

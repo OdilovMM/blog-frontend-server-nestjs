@@ -43,7 +43,7 @@ const SignInSignUp = ({ onSignIn, onSignUp }: AuthPageProps) => {
         <div>
           <label htmlFor="name">Email:</label>
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -51,7 +51,7 @@ const SignInSignUp = ({ onSignIn, onSignUp }: AuthPageProps) => {
         <div>
           <label htmlFor="name">Password:</label>
           <input
-            type="text"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

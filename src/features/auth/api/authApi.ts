@@ -3,6 +3,8 @@ import { ISignInDto } from "../dtos/signin.dto";
 import { ISignUpDto } from "../dtos/signup.dto";
 import { UserDto } from "../dtos/user.dto";
 
+
+
 export const authApi = rootApi.injectEndpoints({
     endpoints: (builder)=> ({
         signUp: builder.mutation<UserDto, ISignUpDto>({
@@ -19,7 +21,14 @@ export const authApi = rootApi.injectEndpoints({
                 body: iSignInDto,
             })
         }),
+        signOut: builder.mutation<void, void>({
+            query: ()=> ({
+                url: '/users/logout',
+                method: 'POST',
+                body: {},
+            })
+        }),
     })
 })
 
-export const {useSignInMutation, useSignUpMutation} = authApi;
+export const {useSignInMutation, useSignUpMutation, useSignOutMutation} = authApi;

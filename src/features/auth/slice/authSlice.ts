@@ -22,7 +22,12 @@ const authSlice = createSlice({
             (state, action:PayloadAction<UserDto>)=> {
                 state.user = action.payload;
             }
-
+        )
+        .addMatcher(
+            authApi.endpoints.signOut.matchFulfilled,
+            (state, action)=> {
+                state.user = null;
+            }
         )
     }
 })
