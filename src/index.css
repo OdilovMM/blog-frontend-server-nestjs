@@ -66,6 +66,13 @@ main {
   margin: 10px 0;
 }
 
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #1976d2;
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -118,4 +125,86 @@ main {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+/* dark mode theme */
+.dark {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark a:link {
+  color: #6cb1f5;
+}
+
+.dark a:hover {
+  color: #1976d2;
+}
+
+.dark a:visited {
+  color: #0a57a3;
+}
+
+.dark header {
+  -webkit-box-shadow: 0px 2px 7px #666;
+  -moz-box-shadow: 0px 2px 7px #666;
+  box-shadow: 0px 2px 7px #666;
+}
+
+.dark footer {
+  -webkit-box-shadow: 0px -2px 7px #666;
+  -moz-box-shadow: 0px 2px 7px #666;
+  box-shadow: 0px 2px 7px #666;
+}
+
+.dark .dropdown-content {
+  background: #333;
+  box-shadow: 0 8px 16px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* left bar motion */
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  padding: 10px 0 10px 20px;
+}
+
+.menu-icon:hover {
+  cursor: pointer;
+}
+
+.drawer {
+  background: #444;
+}
+
+.mobile-menu {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu-user {
+  display: flex;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #fafafa;
+  align-items: center;
+}
+
+.menu-user img {
+  width: 36px;
+  margin-right: 10px;
+}
+
+/* responsive design */
+
+@media only screen and (max-width: 768px) {
+  .desk-menu {
+    display: none;
+  }
+
+  .menu-icon {
+    display: block;
+  }
 }

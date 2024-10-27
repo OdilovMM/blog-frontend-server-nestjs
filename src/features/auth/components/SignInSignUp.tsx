@@ -35,6 +35,7 @@ const SignInSignUp = ({ onSignIn, onSignUp }: AuthPageProps) => {
             <label htmlFor="name">Name:</label>
             <input
               type="text"
+              autoComplete="sample@gmail.com"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
