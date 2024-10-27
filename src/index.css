@@ -197,6 +197,23 @@ a:hover {
   margin-right: 10px;
 }
 
+.drawer a,
+.dark header a:visited,
+header a:visited,
+.dark header a:link,
+header a:link {
+  color: #6cb1f5;
+}
+
+.drawer a:hover,
+.dark header a:hover,
+header a:hover .dark header a:hover,
+header a:hover,
+.dark header a.active header a.active,
+a.active {
+  color: #1976d2;
+}
+
 /* responsive design */
 
 @media only screen and (max-width: 768px) {
