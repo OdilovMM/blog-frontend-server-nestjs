@@ -9,6 +9,7 @@ import { authApi } from './features/auth/api/authApi';
 import CreateCategory from './features/category/pages/CreateCategory';
 import ProtectedRoute from './features/Protected/ProtectedRoute';
 import UnAuthorized from './features/common/pages/UnAuthorized';
+import CreateTag from './features/tag/pages/CreateTag';
 
 function App() {
   const { dark } = useAppSelector(selectTheme);
@@ -27,6 +28,11 @@ function App() {
           <Route path="unauthorized" element={<UnAuthorized />} />
           <Route element={<ProtectedRoute allowedRoles={['author']} />}>
             <Route path="create-category" element={<CreateCategory />} />
+          </Route>
+          <Route
+            element={<ProtectedRoute allowedRoles={['author', 'admin']} />}
+          >
+            <Route path="create-tag" element={<CreateTag />} />
           </Route>
         </Route>
       </Routes>
