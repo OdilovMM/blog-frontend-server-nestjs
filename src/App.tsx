@@ -6,6 +6,9 @@ import { selectTheme } from './features/common/slice/themeSlice';
 import { useAppSelector, useAppDispatch } from './app/hooks';
 import { useEffect } from 'react';
 import { authApi } from './features/auth/api/authApi';
+import CreateCategory from './features/category/pages/CreateCategory';
+import ProtectedRoute from './features/Protected/ProtectedRoute';
+import UnAuthorized from './features/common/pages/UnAuthorized';
 
 function App() {
   const { dark } = useAppSelector(selectTheme);
@@ -21,6 +24,10 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Post />} />
           <Route path="auth" element={<Auth />} caseSensitive={false} />
+          <Route path="unauthorized" element={<UnAuthorized />} />
+          <Route element={<ProtectedRoute allowedRoles={['author']} />}>
+            <Route path="create-category" element={<CreateCategory />} />
+          </Route>
         </Route>
       </Routes>
     </div>
