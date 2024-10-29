@@ -1,4 +1,5 @@
 import { rootApi } from "../../rootApi";
+import { CategoryDto } from "../dtos/Category.dto";
 
 interface ICreateCategoryDto {
     title: string;
@@ -15,7 +16,11 @@ export const categoryApi = rootApi.injectEndpoints({
             }),
             invalidatesTags: ['Categories'],
         }),
+        getCategories: builder.query<CategoryDto[], void>({
+            query:()=>`/categories`,
+            providesTags: ['Categories'],
+        })
     }),
 })
 
-export const {useCreateCategoryMutation} = categoryApi;
+export const {useCreateCategoryMutation, useGetCategoriesQuery} = categoryApi;

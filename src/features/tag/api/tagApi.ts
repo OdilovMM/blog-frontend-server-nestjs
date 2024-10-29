@@ -1,4 +1,5 @@
 import { rootApi } from "../../rootApi";
+import { TagDto } from "../dtos/Tag.dto";
 
 interface ICreateTag {
     title: string;
@@ -13,9 +14,13 @@ export const tagApi = rootApi.injectEndpoints({
                 body: newTag
             }),
             invalidatesTags: ['Tags']
+        }),
+        getTags: builder.query<TagDto[], void>({
+            query: ()=> `tags`,
+            providesTags: ['Tags']
         })
           
     })
 })
 
-export const {useCreateTagMutation} = tagApi;
+export const {useCreateTagMutation, useGetTagsQuery} = tagApi;

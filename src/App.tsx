@@ -11,6 +11,7 @@ import ProtectedRoute from './features/Protected/ProtectedRoute';
 import UnAuthorized from './features/common/pages/UnAuthorized';
 import CreateTag from './features/tag/pages/CreateTag';
 import UpdateUserRoles from './features/auth/pages/UpdateUserRoles';
+import CreatePost from './features/post/pages/CreatePost';
 
 function App() {
   const { dark } = useAppSelector(selectTheme);
@@ -35,6 +36,9 @@ function App() {
             element={<ProtectedRoute allowedRoles={['author', 'admin']} />}
           >
             <Route path="create-tag" element={<CreateTag />} />
+          </Route>
+          <Route element={<ProtectedRoute allowedRoles={['author']} />}>
+            <Route path="create-post" element={<CreatePost />} />
           </Route>
         </Route>
       </Routes>
