@@ -3,9 +3,7 @@ import { selectCurrentUser } from '../auth/slice/authSlice';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
-  console.log(allowedRoles);
   const user = useAppSelector(selectCurrentUser);
-  console.log(user.user);
   const location = useLocation();
 
   return user?.user?.roles?.find((role) => allowedRoles?.includes(role)) ? (

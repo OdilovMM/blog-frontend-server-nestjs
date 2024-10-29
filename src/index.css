@@ -214,6 +214,44 @@ a.active {
   color: #1976d2;
 }
 
+.data-table {
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 5px;
+  border: 1px solid;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: yellow;
+  margin-right: 16px;
+}
+.avatar-big {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: yellow;
+  margin-right: 16px;
+}
+
+input[type='text'],
+button {
+  padding: 5px;
+  width: 250px;
+}
+
+button:hover,
+.sp-bor label:hover,
+input[type='radio']:hover,
+input[type='text']:hover,
+input[type='checkbox']:hover,
+input[type='submit']:hover {
+  cursor: pointer;
+}
+
 /* responsive design */
 
 @media only screen and (max-width: 768px) {
