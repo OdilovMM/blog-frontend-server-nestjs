@@ -1,10 +1,15 @@
 import { rootApi } from '../../rootApi';
 import { CreatePostDto } from '../dtos/CreatePost.dto';
 import { PostTableDto } from '../dtos/post-table.dto';
+import { PostInfoDto } from '../dtos/postInfo.dto';
 
 interface IApprove {
   approve: boolean;
   ids: string[];
+}
+
+interface ISearchParams {
+  searchParams: string;
 }
 
 export const postApi = rootApi.injectEndpoints({
@@ -29,6 +34,10 @@ export const postApi = rootApi.injectEndpoints({
       }),
       invalidatesTags: ['AllPosts'],
     }),
+    getPosts: builder.query<PostInfoDto, ISearchParams>({
+      query: ({ searchParams }) => `/posts/?${searchParams}`,
+      providesTags: ['Posts'],
+    }),
   }),
 });
 
@@ -36,4 +45,5 @@ export const {
   useCreatePostMutation,
   useGetPostsByAdminQuery,
   usePostApprovalMutation,
+  useGetPostsQuery,
 } = postApi;

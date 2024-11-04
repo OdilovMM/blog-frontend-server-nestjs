@@ -281,6 +281,134 @@ input[type='submit']:hover {
   font-style: italic;
 }
 
+/* posts */
+
+article {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #dadada;
+}
+
+.article-last {
+  border-bottom: none;
+}
+
+.article-banner {
+  width: 34%;
+  margin-right: 1%;
+}
+.article-content {
+  width: 65%;
+  text-align: justify;
+}
+.article-title {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 2px;
+}
+
+.article-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.article-author-name {
+  margin: 2px 0;
+}
+.article-body {
+  padding: 0;
+  margin: 0;
+}
+
+.article-main-img {
+  border-radius: 5px;
+}
+
+.article-meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.article-meta span {
+  display: flex;
+  align-items: center;
+}
+
+.bord {
+  margin-right: 7px;
+  padding-right: 7px;
+  border-right: 1px solid #999;
+}
+
+.bordlast {
+  border-right: none;
+  border-right: 0;
+  padding-right: 0;
+}
+
+/* pagination */
+.pagination {
+  justify-content: center;
+  margin: 50px auto 20px;
+  list-style-type: none;
+  display: flex;
+  padding-inline-start: 0;
+}
+
+.pagination .page-item a {
+  padding: 5px 15px;
+  border: 1px solid #dadada;
+  text-decoration: none;
+  color: #1976d2;
+}
+
+.pagination .page-item a:hover {
+  background: #fafafa;
+}
+
+.pagination .disabled a,
+.pagination .disabled a:hover {
+  cursor: not-allowed;
+  color: #999;
+  background: #cacaca;
+}
+
+.pagination .active a,
+.pagination .active a:hover {
+  background: #1976d2;
+  cursor: not-allowed;
+  color: #fff;
+  border: 1px solid #1976d2;
+}
+
+.symbol {
+  margin: 0 0;
+}
+
+.pagination .itemClassFirst a::before {
+  content: '\00AB';
+}
+
+.pagination .itemClassPrev a::before {
+  content: '\2039';
+}
+
+.pagination .itemClassNext a::before {
+  content: '\203A';
+}
+
+.pagination .itemClassLast a::before {
+  content: '\00BB';
+}
+
 /* responsive design */
 
 @media only screen and (max-width: 768px) {

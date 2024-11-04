@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserDto } from '../../../auth/dtos/user.dto';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useSignOutMutation } from '../../../auth/api/authApi';
 
 const DesktopMenu = ({ user }: { user: UserDto | null }) => {
@@ -31,51 +31,49 @@ const DesktopMenu = ({ user }: { user: UserDto | null }) => {
       )}
       {user && (
         <div className="dropdown">
-          <Link to="#">
+          <div className="dropdown-trigger">
             <img src={user.avatar} alt={user.name} className="avatar-small" />
             <span>{user.name}</span>
-            <div className="dropdown-content">
-              <Link to="#" onClick={handleSignOut}>
-                Logout
-              </Link>
-              {user.roles.find((role) =>
-                ['admin', 'author'].includes(role)
-              ) && (
-                <>
-                  <NavLink
-                    to="/create-post"
-                    className={({ isActive }) => (isActive ? 'active' : '')}
-                  >
-                    Create Post
-                  </NavLink>
-                  <NavLink
-                    to="/create-category"
-                    className={({ isActive }) => (isActive ? 'active' : '')}
-                  >
-                    Create Category
-                  </NavLink>
-                  <NavLink
-                    to="/create-tag"
-                    className={({ isActive }) => (isActive ? 'active' : '')}
-                  >
-                    Create Tag
-                  </NavLink>
-                  <NavLink
-                    to="/approve"
-                    className={({ isActive }) => (isActive ? 'active' : '')}
-                  >
-                    Approve Posts
-                  </NavLink>
-                  <NavLink
-                    to="/users/role"
-                    className={({ isActive }) => (isActive ? 'active' : '')}
-                  >
-                    Role Update
-                  </NavLink>
-                </>
-              )}
-            </div>
-          </Link>
+          </div>
+          <div className="dropdown-content">
+            <button onClick={handleSignOut} className="dropdown-link">
+              Logout
+            </button>
+            {user.roles.some((role) => ['admin', 'author'].includes(role)) && (
+              <>
+                <NavLink
+                  to="/create-post"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Create Post
+                </NavLink>
+                <NavLink
+                  to="/create-category"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Create Category
+                </NavLink>
+                <NavLink
+                  to="/create-tag"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Create Tag
+                </NavLink>
+                <NavLink
+                  to="/approve"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Approve Posts
+                </NavLink>
+                <NavLink
+                  to="/users/role"
+                  className={({ isActive }) => (isActive ? 'active' : '')}
+                >
+                  Role Update
+                </NavLink>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>
