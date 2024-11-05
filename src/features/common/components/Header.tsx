@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.png';
 import DesktopMenu from './menus/DesktopMenu';
-import { selectCurrentUser } from '../../auth/slice/authSlice';
 import DrawerMenu from './menus/DrawerMenu';
 import { selectTheme, changeTheme } from '../slice/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import SearchDialogue from './SearchDialogue';
 
 const Header = () => {
-  const { user } = useAppSelector(selectCurrentUser);
+  const { user } = useAppSelector(selectTheme);
+  const darkMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
-  const { dark: darkMode } = useAppDispatch(selectTheme);
-  const [dark, setDark] = useState(darkMode);
+  // const { dark: darkMode } = useAppDispatch();
+  const [dark, setDark] = useState(darkMode.dark);
 
   const handleChangeTheme = () => {
     setDark(!dark);
@@ -27,6 +28,7 @@ const Header = () => {
       </div>
 
       <div className="menu">
+        <SearchDialogue />
         <DesktopMenu user={user} />
         <span className="sp-border">
           <input
