@@ -8,8 +8,6 @@ interface IChangeRolesDto {
     roles: string[]
 }
 
-
-
 export const authApi = rootApi.injectEndpoints({
     endpoints: (builder)=> ({
         signUp: builder.mutation<UserDto, ISignUpDto>({
@@ -47,8 +45,12 @@ export const authApi = rootApi.injectEndpoints({
                 body: iChangeRolesDto,
             }),
             invalidatesTags: ['Users']
+        }),
+        getAuthors: builder.query<UserDto[], void>({
+            query: ()=> `users/roles/authors`,
+            providesTags: ['Users']
         })
     })
 })
 
-export const {useSignInMutation, useSignUpMutation, useSignOutMutation, useGetUsersQuery, useChangeRolesMutation} = authApi;
+export const {useSignInMutation, useSignUpMutation, useSignOutMutation, useGetAuthorsQuery, useGetUsersQuery, useChangeRolesMutation} = authApi;

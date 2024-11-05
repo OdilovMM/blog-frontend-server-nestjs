@@ -14,6 +14,7 @@ import UpdateUserRoles from './features/auth/pages/UpdateUserRoles';
 import CreatePost from './features/post/pages/CreatePost';
 import ApprovePosts from './features/post/pages/ApprovePosts';
 import Search from './features/post/pages/Search';
+import PostDetails from './features/post/pages/PostDetails';
 
 function App() {
   const { dark } = useAppSelector(selectTheme);
@@ -31,6 +32,8 @@ function App() {
           <Route path="auth" element={<Auth />} caseSensitive={false} />
           <Route path="unauthorized" element={<UnAuthorized />} />
           <Route path="search" element={<Search />} />
+          <Route path="posts/:id" element={<PostDetails />} />
+
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="create-category" element={<CreateCategory />} />
             <Route path="users/role" element={<UpdateUserRoles />} />

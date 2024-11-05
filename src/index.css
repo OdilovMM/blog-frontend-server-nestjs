@@ -409,6 +409,171 @@ article {
   content: '\00BB';
 }
 
+/* single post */
+
+.article-author-avatar {
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.article-like {
+  cursor: pointer;
+  padding: 15px 0 15px 20px;
+}
+
+.article-details .article-content {
+  width: 100%;
+}
+
+.article-banner-main {
+  width: 100%;
+}
+
+.article-details {
+  display: flex;
+  flex-direction: column;
+}
+.comment-count {
+  padding: 10px;
+  background: #999;
+  margin-top: 25px;
+}
+.comment {
+  display: flex;
+  margin: 15px 0;
+  padding: 10px 0;
+  border-bottom: 1px dotted #666;
+}
+.newcomment {
+  border: 1px dotted #666;
+  border-radius: 10px;
+}
+.comment-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.comment-head {
+  display: flex;
+  align-items: center;
+  margin: 0 0 5px 0;
+}
+.commentby {
+  font-weight: bold;
+  margin-right: 15px;
+}
+.commentAt {
+  font-style: italic;
+  font-size: small;
+}
+.comment-new {
+  display: flex;
+  align-items: center;
+}
+summary {
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.aside-content {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+.aside-header {
+  background: #ccc;
+  margin-bottom: 10px;
+  padding: 10px;
+  margin-top: 0;
+  color: #000;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.aside-body {
+  padding: 0 10px;
+}
+.cloud .list {
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.tag-cloud .list {
+  display: inline-flex;
+}
+.tag-cloud a {
+  padding: 5px;
+  display: inline-flex;
+  margin: 10px;
+  -webkit-box-shaow: 0px 8px 8px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 8px 8px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 7px 8px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 18px;
+}
+.search-button {
+  cursor: pointer;
+}
+.dialog {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-width: 650px;
+  min-width: 400px;
+  overflow-x: hidden;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+}
+.dialog-header,
+.dialog-header span,
+.dialog-header button,
+.dark .dialog-header,
+.dark .dialog-header span,
+.dark .dialog-header button {
+  display: flex;
+  justify-content: space-between;
+  background-color: #000;
+  color: #fff;
+  padding: 0;
+}
+.dialog-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  padding: 10px;
+}
+.dialog-option {
+  display: flex;
+  flex-direction: column;
+}
+.dialog-footer {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 25px 0 10px 0;
+}
+dialog {
+  padding: 0;
+}
+.dark .dialog {
+  background-color: #333;
+  color: #fff;
+}
+.search-by {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  justify-content: space-evenly;
+  background-color: #999;
+}
+/* .comment-avtr css add after video uploaded to yourube */
+.comment-avatar {
+  display: flex;
+}
+
 /* responsive design */
 
 @media only screen and (max-width: 768px) {

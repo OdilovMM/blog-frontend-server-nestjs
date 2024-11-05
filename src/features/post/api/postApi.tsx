@@ -1,6 +1,7 @@
 import { rootApi } from '../../rootApi';
 import { CreatePostDto } from '../dtos/CreatePost.dto';
 import { PostTableDto } from '../dtos/post-table.dto';
+import { PostDto } from '../dtos/post.dto';
 import { PostInfoDto } from '../dtos/postInfo.dto';
 
 interface IApprove {
@@ -38,6 +39,10 @@ export const postApi = rootApi.injectEndpoints({
       query: ({ searchParams }) => `/posts/?${searchParams}`,
       providesTags: ['Posts'],
     }),
+    getPostDetails: builder.query<PostDto, string>({
+      query: (id: string) => `/posts/${id}`,
+      providesTags: ['Post'],
+    }),
   }),
 });
 
@@ -46,4 +51,5 @@ export const {
   useGetPostsByAdminQuery,
   usePostApprovalMutation,
   useGetPostsQuery,
+  useGetPostDetailsQuery,
 } = postApi;
