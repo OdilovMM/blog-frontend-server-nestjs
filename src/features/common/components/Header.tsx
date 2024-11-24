@@ -6,9 +6,10 @@ import DrawerMenu from './menus/DrawerMenu';
 import { selectTheme, changeTheme } from '../slice/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import SearchDialogue from './SearchDialogue';
+import { selectCurrentUser } from '../../auth/slice/authSlice';
 
 const Header = () => {
-  const { user } = useAppSelector(selectTheme);
+  const { user } = useAppSelector(selectCurrentUser);
   const darkMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
   // const { dark: darkMode } = useAppDispatch();

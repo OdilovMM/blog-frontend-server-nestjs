@@ -514,6 +514,7 @@ summary {
 .search-button {
   cursor: pointer;
 }
+
 .dialog {
   display: flex;
   flex-direction: column;
@@ -533,9 +534,10 @@ dialog::backdrop {
 .dark .dialog-header button {
   display: flex;
   justify-content: space-between;
-  background-color: #000;
+  background-color: #513131;
   color: #fff;
-  padding: 0;
+  padding: 3px;
+  width: 100%;
 }
 .dialog-header {
   display: flex;
@@ -575,6 +577,7 @@ dialog {
   justify-content: space-evenly;
   background-color: #999;
 }
+
 /* .comment-avtr css add after video uploaded to yourube */
 .comment-avatar {
   display: flex;

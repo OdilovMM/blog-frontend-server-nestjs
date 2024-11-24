@@ -2,6 +2,8 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { rootApi } from "../features/rootApi";
 import authReducer from '../features/auth/slice/authSlice';
 import themeReducer from '../features/common/slice/themeSlice';
+import { errorNotify } from "./error-notify-middleware";
+
 
 
 export const store = configureStore({

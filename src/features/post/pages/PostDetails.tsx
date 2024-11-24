@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useGetPostDetailsQuery } from '../api/postApi';
+import { useChangeLikeMutation, useGetPostDetailsQuery } from '../api/postApi';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { selectCurrentUser } from '../../auth/slice/authSlice';
@@ -12,7 +12,7 @@ import Comments from '../components/Comments';
 const PostDetails = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const [comment, setComment] = useState<string>('');
-
+  const [changeLike] = useChangeLikeMutation();
   const location = useLocation();
   const navigate = useNavigate();
   const { id = '' } = useParams();
@@ -24,7 +24,13 @@ const PostDetails = () => {
   } = useGetPostDetailsQuery(id);
   const { data: comments } = useGetCommentsQuery(id);
 
-  const handleLike = () => {};
+  const handleLike = () => {
+    if (user) {
+      changeLike({ postId: id, userId: user._id });
+    } else {
+      navigate('/auth', { state: { from: location }, replace: true });
+    }
+  };
   const addComment = () => {};
 
   let content;

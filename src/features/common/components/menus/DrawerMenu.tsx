@@ -27,9 +27,7 @@ const DrawerMenu = ({ user }: { user: UserDto | null }) => {
         open={open}
         // defaultOpen
         onClose={onTouchEnd}
-        afterOpenChange={(c: boolean) => {
-          console.log('transitionEnd: ', c);
-        }}
+        afterOpenChange={(c: boolean) => {}}
         className="drawer"
         placement="right"
         // width={400}
@@ -63,7 +61,7 @@ const DrawerMenu = ({ user }: { user: UserDto | null }) => {
             Home
           </NavLink>
           <NavLink
-            to="/about"
+            to="#"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             About

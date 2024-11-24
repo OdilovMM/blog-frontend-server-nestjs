@@ -12,7 +12,6 @@ const CreateCategory = () => {
       title,
       description,
     };
-    console.log(newCategory);
     createCategory(newCategory);
   };
 

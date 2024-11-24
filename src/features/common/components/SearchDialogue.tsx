@@ -16,7 +16,7 @@ const SearchDialogue = () => {
   const [category, setCategory] = useState<string>(
     searchParams.get('category') || '0'
   );
-  const [tags, setTags] = useState<string[]>();
+  const [tags, setTags] = useState<string[]>([]);
   const { data: authors } = useGetAuthorsQuery();
   const { data: categories } = useGetCategoriesQuery();
   const { data: tagsList } = useGetTagsQuery();

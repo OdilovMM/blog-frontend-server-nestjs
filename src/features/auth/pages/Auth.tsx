@@ -37,7 +37,7 @@ const Auth = () => {
     if (signedUp) {
       enqueueSnackbar('User signed up', { variant: 'success' });
     }
-  }, [signedUp, user, navigate]);
+  }, [signedUp, user, navigate, from]);
 
   return (
     <div className="auth">

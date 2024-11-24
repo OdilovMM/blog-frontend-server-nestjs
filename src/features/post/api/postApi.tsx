@@ -13,6 +13,11 @@ interface ISearchParams {
   searchParams: string;
 }
 
+interface ILikeRequestParams {
+  postId: string;
+  userId: string;
+}
+
 export const postApi = rootApi.injectEndpoints({
   endpoints: (builder) => ({
     createPost: builder.mutation<void, CreatePostDto>({
@@ -43,6 +48,34 @@ export const postApi = rootApi.injectEndpoints({
       query: (id: string) => `/posts/${id}`,
       providesTags: ['Post'],
     }),
+    changeLike: builder.mutation<string[], ILikeRequestParams>({
+      query: ({ postId }: ILikeRequestParams) => ({
+        url: `/posts/${postId}/likes`,
+        method: 'PATCH',
+        body: {},
+      }),
+      async onQueryStarted(
+        { postId, userId }: ILikeRequestParams,
+        { dispatch, queryFulfilled }
+      ) {
+        const result = dispatch(
+          postApi.util.updateQueryData('getPostDetails', postId, (draft) => {
+            draft.likes = draft.likes || [];
+            const index = draft.likes.indexOf(userId);
+            if (index > -1) {
+              draft.likes.splice(index, 1);
+            } else {
+              draft.likes.push(userId);
+            }
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          result.undo();
+        }
+      },
+    }),
   }),
 });
 
@@ -52,4 +85,5 @@ export const {
   usePostApprovalMutation,
   useGetPostsQuery,
   useGetPostDetailsQuery,
+  useChangeLikeMutation,
 } = postApi;
