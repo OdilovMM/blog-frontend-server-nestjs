@@ -1,7 +1,8 @@
 import { ReplyDto } from '../dtos/reply.dto';
 import { UserDto } from '../../auth/dtos/user.dto';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useAddNewCommentMutation } from '../api/commentApi';
 
 interface RepliesProps {
   replies: ReplyDto[];
@@ -10,10 +11,29 @@ interface RepliesProps {
 }
 
 const Replies = ({ replies, user, commentId }: RepliesProps) => {
+  const [addNewReply] = useAddNewCommentMutation();
   const location = useLocation();
   const [replyText, setReplyText] = useState<string>('');
+  const { id = '' } = useParams();
 
-  const handleReply = () => {};
+  const handleReply = () => {
+    if (user && replyText !== '') {
+      const newReply = {
+        postId: id,
+        commentId: commentId,
+        _id: Math.floor(Math.random() * 9999).toString(),
+        replyBy: {
+          _id: user._id,
+          name: user.name,
+          avatar: user.avatar,
+        },
+        replyText: replyText,
+        replyAt: new Date().toISOString(),
+      };
+      addNewReply(newReply);
+      setReplyText('');
+    }
+  };
   return (
     <>
       <details>

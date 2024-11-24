@@ -6,13 +6,17 @@ import { selectCurrentUser } from '../../auth/slice/authSlice';
 import { useAppSelector } from '../../../app/hooks';
 import { BiCategory } from 'react-icons/bi';
 import { BsTags } from 'react-icons/bs';
-import { useGetCommentsQuery } from '../api/commentApi';
+import {
+  useGetCommentsQuery,
+  useAddNewCommentMutation,
+} from '../api/commentApi';
 import Comments from '../components/Comments';
 
 const PostDetails = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const [comment, setComment] = useState<string>('');
   const [changeLike] = useChangeLikeMutation();
+  const [addNewComment] = useAddNewCommentMutation();
   const location = useLocation();
   const navigate = useNavigate();
   const { id = '' } = useParams();
@@ -23,6 +27,7 @@ const PostDetails = () => {
     isSuccess,
   } = useGetPostDetailsQuery(id);
   const { data: comments } = useGetCommentsQuery(id);
+  console.log(comments);
 
   const handleLike = () => {
     if (user) {
@@ -31,7 +36,25 @@ const PostDetails = () => {
       navigate('/auth', { state: { from: location }, replace: true });
     }
   };
-  const addComment = () => {};
+
+  const addComment = () => {
+    if (user) {
+      const newComment = {
+        postId: id,
+        _id: Math.floor(Math.random() * 9999).toString(),
+        commentBy: {
+          _id: user._id.toString(),
+          name: user.name,
+          avatar: user.avatar,
+        },
+        commentText: comment,
+        commentAt: new Date().toISOString(),
+        replies: [],
+      };
+      addNewComment(newComment);
+      setComment('');
+    }
+  };
 
   let content;
   if (isLoading) content = <>Loading</>;

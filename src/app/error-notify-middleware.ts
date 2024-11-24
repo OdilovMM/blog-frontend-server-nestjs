@@ -1,4 +1,4 @@
-import { isRejected, isRejectedWithValue, Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
+import {  isRejectedWithValue, Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
 import { enqueueSnackbar } from "notistack";
 
 interface ErrorPayload {

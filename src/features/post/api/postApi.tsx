@@ -72,6 +72,7 @@ export const postApi = rootApi.injectEndpoints({
         try {
           await queryFulfilled;
         } catch (error) {
+          console.log(error);
           result.undo();
         }
       },
