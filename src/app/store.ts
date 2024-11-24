@@ -12,7 +12,7 @@ export const store = configureStore({
         auth: authReducer,
         theme: themeReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rootApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rootApi.middleware, errorNotify)
 })
 
 
