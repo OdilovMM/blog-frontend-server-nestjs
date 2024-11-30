@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   padding: 0;
@@ -53,8 +57,10 @@ main {
 }
 
 .sidebar {
-  width: 25%;
+  width: 18%;
   flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .auth {
@@ -79,6 +85,7 @@ a:hover {
   align-self: center;
   justify-content: center;
   gap: 25px;
+  padding-right: 15px;
 }
 
 .desk-menu a {
@@ -477,12 +484,14 @@ summary {
   margin-top: 5px;
 }
 .aside-content {
-  border: 1px solid #ccc;
+  border: 1px solid #efe2e295;
   margin-bottom: 20px;
   padding-bottom: 10px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .aside-header {
-  background: #ccc;
+  background: #bad7e8;
   margin-bottom: 10px;
   padding: 10px;
   margin-top: 0;
@@ -581,6 +590,14 @@ dialog {
 /* .comment-avtr css add after video uploaded to yourube */
 .comment-avatar {
   display: flex;
+}
+
+.loader-text {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+  transform: translateY(230px);
 }
 
 /* responsive design */

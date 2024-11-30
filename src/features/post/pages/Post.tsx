@@ -31,7 +31,7 @@ const Post = () => {
 
   let content;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <div className="loader-text">Loading...</div>;
   }
   if (isError) {
     content = <div>Error Occurred</div>;
@@ -52,24 +52,26 @@ const Post = () => {
           })}
         {/* pagination */}
         <div className="paginate">
-          <Pagination
-            activePage={currentPage}
-            itemsCountPerPage={postInfo.limit}
-            totalItemsCount={postInfo.filteredPostCount}
-            onChange={(page: number) => handlePage(page)}
-            nextPageText=">"
-            prevPageText="<"
-            firstPageText="<<"
-            lastPageText=">>"
-            itemClass="page-item"
-            linkClass="page-link"
-            activeClass="pageItemActive active"
-            activeLinkClass="pageLInkActive disabled"
-            itemClassNext="symbol"
-            itemClassLast="symbol"
-            itemClassFirst="symbol"
-            itemClassPrev="symbol"
-          />
+          {postInfo?.posts.length > 5 && (
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={postInfo.limit}
+              totalItemsCount={postInfo.filteredPostCount}
+              onChange={(page: number) => handlePage(page)}
+              nextPageText=">"
+              prevPageText="<"
+              firstPageText="<<"
+              lastPageText=">>"
+              itemClass="page-item"
+              linkClass="page-link"
+              activeClass="pageItemActive active"
+              activeLinkClass="pageLInkActive disabled"
+              itemClassNext="symbol"
+              itemClassLast="symbol"
+              itemClassFirst="symbol"
+              itemClassPrev="symbol"
+            />
+          )}
         </div>
       </>
     );

@@ -3,6 +3,7 @@ import { UserDto } from '../../auth/dtos/user.dto';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useAddNewCommentMutation } from '../api/commentApi';
+import { CommentDto } from '../dtos/comment.dto';
 
 interface RepliesProps {
   replies: ReplyDto[];
@@ -29,6 +30,7 @@ const Replies = ({ replies, user, commentId }: RepliesProps) => {
         },
         replyText: replyText,
         replyAt: new Date().toISOString(),
+        replies: [],
       };
       addNewReply(newReply);
       setReplyText('');
@@ -39,7 +41,7 @@ const Replies = ({ replies, user, commentId }: RepliesProps) => {
       <details>
         <summary>
           reply
-          {!replies.length
+          {!replies?.length
             ? ''
             : replies.length === 1
             ? ' - ' + replies.length + ' reply'
@@ -65,7 +67,7 @@ const Replies = ({ replies, user, commentId }: RepliesProps) => {
           </Link>
         )}
         <div className="replies">
-          {replies.map((reply) => (
+          {replies?.map((reply) => (
             <div className="comment">
               <div className="comment-avatar">
                 <img

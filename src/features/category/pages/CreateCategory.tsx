@@ -3,7 +3,8 @@ import { useCreateCategoryMutation } from '../api/categoryApi';
 import { enqueueSnackbar } from 'notistack';
 
 const CreateCategory = () => {
-  const [createCategory, { isSuccess }] = useCreateCategoryMutation();
+  const [createCategory, { isSuccess, isError, reset }] =
+    useCreateCategoryMutation();
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
 
@@ -20,10 +21,14 @@ const CreateCategory = () => {
       enqueueSnackbar('Category Added', { variant: 'success' });
       setTitle('');
       setDescription('');
-    } else {
-      enqueueSnackbar('error', { variant: 'error' });
+      reset();
     }
-  }, [isSuccess]);
+    if (isError) {
+      console.log('error');
+      enqueueSnackbar('error', { variant: 'error' });
+      reset();
+    }
+  }, [isSuccess, isError, reset]);
 
   const isSubmitDisabled = title.trim() === '' || description.trim() === '';
 

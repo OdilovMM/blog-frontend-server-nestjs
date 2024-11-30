@@ -20,8 +20,10 @@ export const commentApi = rootApi.injectEndpoints({
                 method: "POST",
                 body: {postId, commentText}
             }),
-            async onQueryStarted({postId, ...rest}: CommentDto, 
-                {dispatch, queryFulfilled}) {
+            async onQueryStarted(
+                {postId, ...rest}: CommentDto, 
+                {dispatch, queryFulfilled}
+            ) {
                     const result = dispatch(
                         commentApi.util.updateQueryData("getComments", postId, (draft)=> {
                             draft.unshift({postId, ...rest});
@@ -34,7 +36,7 @@ export const commentApi = rootApi.injectEndpoints({
                             draft[0]._id = comment._id;
                         }))
                     } catch (error) {
-                        console.log(error);
+                        console.log(error)
                         result.undo();
                     }
                 }

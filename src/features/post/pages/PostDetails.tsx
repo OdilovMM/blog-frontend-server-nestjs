@@ -27,7 +27,6 @@ const PostDetails = () => {
     isSuccess,
   } = useGetPostDetailsQuery(id);
   const { data: comments } = useGetCommentsQuery(id);
-  console.log(comments);
 
   const handleLike = () => {
     if (user) {
@@ -58,7 +57,7 @@ const PostDetails = () => {
 
   let content;
   if (isLoading) content = <>Loading</>;
-  if (isError) content = <>Error ocurred</>;
+  if (isError) content = <>Error occurred</>;
   if (isSuccess) {
     content = (
       <article className="article-details">
@@ -122,7 +121,7 @@ const PostDetails = () => {
         </div>
         <div className="article-comment">
           <div className="comment-count">
-            {!comments?.length ? 'No Comments' : comments.length + 'comments'}
+            {!comments?.length ? 'No Comments' : comments.length + ' comments'}
           </div>
           <div className="comment">
             {!user ? (

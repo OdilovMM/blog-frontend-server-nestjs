@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+// import './indexcopy.css';
 import './index.css';
 import App from './App.tsx';
 import { closeSnackbar, SnackbarProvider } from 'notistack';
@@ -8,7 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store.ts';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <>
     <Provider store={store}>
       <SnackbarProvider
         maxSnack={8}
@@ -26,5 +27,5 @@ createRoot(document.getElementById('root')!).render(
         </BrowserRouter>
       </SnackbarProvider>
     </Provider>
-  </StrictMode>
+  </>
 );
