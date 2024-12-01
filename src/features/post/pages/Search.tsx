@@ -100,7 +100,7 @@ const Search = () => {
           {tagList ? <span>Tags : {tagList}</span> : ''}
         </div>
         <div className="search-item">
-          {postInfo.posts &&
+          {postInfo.posts && postInfo.posts.length > 0 ? (
             postInfo?.posts?.map((post, index) => {
               return (
                 <PostCard
@@ -110,7 +110,10 @@ const Search = () => {
                   key={post._id}
                 />
               );
-            })}
+            })
+          ) : (
+            <h2>Nothing has been found.... Sorry</h2>
+          )}
         </div>
         {/* pagination */}
         <div className="paginate">

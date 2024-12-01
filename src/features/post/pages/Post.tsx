@@ -3,6 +3,7 @@ import { useGetPostsQuery } from '../api/postApi';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import PostCard from '../components/PostCard';
 import Pagination from 'react-js-pagination';
+import { PuffLoader } from 'react-spinners';
 
 const Post = () => {
   const location = useLocation();
@@ -31,10 +32,18 @@ const Post = () => {
 
   let content;
   if (isLoading) {
-    content = <div className="loader-text">Loading...</div>;
+    content = (
+      <div className="flex mt-[220px] items-center justify-center">
+        <PuffLoader />
+      </div>
+    );
   }
   if (isError) {
-    content = <div>Error Occurred</div>;
+    content = (
+      <div className="flex mt-[220px] items-center justify-center">
+        Error Occurred in fetching data...
+      </div>
+    );
   }
   if (isSuccess) {
     content = (
