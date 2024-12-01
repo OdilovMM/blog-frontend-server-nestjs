@@ -25,7 +25,9 @@ const CreateCategory = () => {
     }
     if (isError) {
       console.log('error');
-      enqueueSnackbar('error', { variant: 'error' });
+      enqueueSnackbar('Error occurred while adding category', {
+        variant: 'error',
+      });
       reset();
     }
   }, [isSuccess, isError, reset]);
@@ -33,31 +35,50 @@ const CreateCategory = () => {
   const isSubmitDisabled = title.trim() === '' || description.trim() === '';
 
   return (
-    <>
-      <h3>Create a category</h3>
-      <label>Category Title</label>
+    <div className="flex flex-col w-[400px] max-w-[90%] mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+      <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+        Create a Category
+      </h3>
+
+      <label htmlFor="title" className="text-gray-700 text-sm font-medium mb-2">
+        Category Title
+      </label>
       <input
         type="text"
+        id="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className="p-3 border border-gray-300 rounded-md mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="Enter category title"
       />
-      <br />
-      <label>Category Description</label>
+
+      <label
+        htmlFor="description"
+        className="text-gray-700 text-sm font-medium mb-2"
+      >
+        Category Description
+      </label>
       <input
         type="text"
+        id="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        className="p-3 border border-gray-300 rounded-md mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="Enter category description"
       />
-      <br />
-      <br />
+
       <button
         onClick={handleSubmit}
-        style={{ padding: '10px' }}
+        className={`w-full p-3 text-white rounded-md ${
+          isSubmitDisabled
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-blue-600 hover:bg-blue-700'
+        }`}
         disabled={isSubmitDisabled}
       >
         Submit
       </button>
-    </>
+    </div>
   );
 };
 

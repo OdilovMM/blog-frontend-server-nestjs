@@ -39,20 +39,22 @@ const Post = () => {
   if (isSuccess) {
     content = (
       <>
-        {postInfo.posts &&
-          postInfo?.posts?.map((post, index) => {
-            return (
-              <PostCard
-                postInfo={postInfo}
-                post={post}
-                index={index}
-                key={post._id}
-              />
-            );
-          })}
-        {/* pagination */}
+        <div className="container-posts">
+          {postInfo.posts &&
+            postInfo?.posts?.map((post, index) => {
+              return (
+                <PostCard
+                  postInfo={postInfo}
+                  post={post}
+                  index={index}
+                  key={post._id}
+                />
+              );
+            })}
+          {/* pagination */}
+        </div>
         <div className="paginate">
-          {postInfo?.posts.length > 5 && (
+          {postInfo?.posts.length > 2 && (
             <Pagination
               activePage={currentPage}
               itemsCountPerPage={postInfo.limit}

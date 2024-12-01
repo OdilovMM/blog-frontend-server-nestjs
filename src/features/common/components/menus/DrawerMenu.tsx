@@ -1,110 +1,98 @@
 import React, { useState } from 'react';
-import { UserDto } from '../../../auth/dtos/user.dto';
 import Drawer from 'rc-drawer';
-import motionProps from './motion/motion';
 import { FiMenu } from 'react-icons/fi';
+import { UserDto } from '../../../auth/dtos/user.dto';
 import { Link, NavLink } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa';
 import { useSignOutMutation } from '../../../auth/api/authApi';
 
-const DrawerMenu = ({ user }: { user: UserDto | null }) => {
+const DrawerMenu: React.FC<{ user: UserDto | null }> = ({ user }) => {
   const [open, setOpen] = useState(false);
-  const onTouchEnd = () => {
-    setOpen(false);
-  };
-  const onSwitch = () => {
-    setOpen((c) => !c);
-  };
-
   const [signOut] = useSignOutMutation();
 
-  const handleSignOut = () => {
-    signOut();
-  };
+  const toggleDrawer = () => setOpen(!open);
+
   return (
     <>
+      <button
+        className="block md:hidden p-2 text-gray-800 dark:text-gray-300"
+        onClick={toggleDrawer}
+      >
+        <FiMenu size={24} />
+      </button>
+
       <Drawer
         open={open}
-        // defaultOpen
-        onClose={onTouchEnd}
-        afterOpenChange={(c: boolean) => {}}
-        className="drawer"
+        onClose={toggleDrawer}
         placement="right"
-        // width={400}
         width="75%"
-        // Motion
-        {...motionProps}
+        className="dark:bg-gray-900 bg-white"
       >
-        <div className="mobile-menu">
+        <div className="p-4">
           {user ? (
-            <>
-              <div className="menu-user">
-                <img src={user.avatar} alt={user.name} />
-                <span>{user.name}</span>
-              </div>
-              <Link to="#" onClick={handleSignOut}>
-                <FaSignOutAlt size={35} />
-              </Link>
-            </>
+            <div className="flex items-center space-x-4">
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-10 h-10 rounded-full"
+              />
+              <span className="text-lg">{user.name}</span>
+            </div>
           ) : (
             <NavLink
               to="/auth"
-              className={({ isActive }) => (isActive ? 'active' : '')}
+              className="block text-lg py-2"
+              onClick={toggleDrawer}
             >
-              Login / Register
+              Sign In / Register
             </NavLink>
           )}
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? 'active' : '')}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="#"
-            className={({ isActive }) => (isActive ? 'active' : '')}
-          >
-            About
-          </NavLink>
-          {user?.roles.find((role) => ['admin', 'author'].includes(role)) && (
-            <>
-              <NavLink
-                to="/create-post"
-                className={({ isActive }) => (isActive ? 'active' : '')}
+          <nav className="mt-4 space-y-2">
+            <NavLink
+              to="/"
+              className="block hover:text-blue-500"
+              onClick={toggleDrawer}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/"
+              className="block hover:text-blue-500"
+              onClick={toggleDrawer}
+            >
+              About
+            </NavLink>
+            {user?.roles.some((role) => ['admin', 'author'].includes(role)) && (
+              <>
+                <NavLink
+                  to="/create-post"
+                  className="block hover:text-blue-500"
+                  onClick={toggleDrawer}
+                >
+                  Create Post
+                </NavLink>
+                <NavLink
+                  to="/approve"
+                  className="block hover:text-blue-500"
+                  onClick={toggleDrawer}
+                >
+                  Approve Posts
+                </NavLink>
+              </>
+            )}
+            {user && (
+              <button
+                onClick={() => {
+                  signOut();
+                  toggleDrawer();
+                }}
+                className="block text-left w-full hover:text-red-500"
               >
-                Create Post
-              </NavLink>
-              <NavLink
-                to="/create-category"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Create Category
-              </NavLink>
-              <NavLink
-                to="/create-tag"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Create Tag
-              </NavLink>
-              <NavLink
-                to="/approve"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Approve Posts
-              </NavLink>
-              <NavLink
-                to="/users/role"
-                className={({ isActive }) => (isActive ? 'active' : '')}
-              >
-                Role Update
-              </NavLink>
-            </>
-          )}
+                Logout
+              </button>
+            )}
+          </nav>
         </div>
       </Drawer>
-      <button onClick={onSwitch} className="menu-icon">
-        <FiMenu />
-      </button>
     </>
   );
 };

@@ -6,6 +6,7 @@ import PostCard from '../components/PostCard';
 import { useGetAuthorsQuery } from '../../auth/api/authApi';
 import { useGetCategoriesQuery } from '../../category/api/categoryApi';
 import { useGetTagsQuery } from '../../tag/api/tagApi';
+import { PuffLoader } from 'react-spinners';
 
 const Search = () => {
   const location = useLocation();
@@ -56,7 +57,7 @@ const Search = () => {
   }
 
   const { data: tags } = useGetTagsQuery();
-  let tagList: string | null = null;
+  let tagList: string[] | null = null;
   if (searchParams.get('tags')) {
     if (tags) {
       tagList = searchParams.getAll('tags').map((tagId) => {
@@ -76,53 +77,65 @@ const Search = () => {
 
   let content;
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = (
+      <div className="flex items-center justify-center mt-[220px]">
+        <PuffLoader />
+      </div>
+    );
   }
   if (isError) {
-    content = <div>Error Occurred</div>;
+    content = (
+      <div className="flex mt-[220px] items-center justify-center">
+        Error Occurred in fetching data...
+      </div>
+    );
   }
   if (isSuccess) {
     content = (
-      <>
+      <div className="search-container">
         <div className="search-by">
-          Search with - {title ? <span>Title : {title}</span> : ''}
+          Search result - {title ? <span>Title : {title}</span> : ''}
           {author ? <span>Title : {author}</span> : ''}
           {category ? <span>Category : {category}</span> : ''}
           {tagList ? <span>Tags : {tagList}</span> : ''}
         </div>
-        {postInfo.posts &&
-          postInfo?.posts?.map((post, index) => {
-            return (
-              <PostCard
-                postInfo={postInfo}
-                post={post}
-                index={index}
-                key={post._id}
-              />
-            );
-          })}
+        <div className="search-item">
+          {postInfo.posts &&
+            postInfo?.posts?.map((post, index) => {
+              return (
+                <PostCard
+                  postInfo={postInfo}
+                  post={post}
+                  index={index}
+                  key={post._id}
+                />
+              );
+            })}
+        </div>
         {/* pagination */}
         <div className="paginate">
-          <Pagination
-            activePage={currentPage}
-            itemsCountPerPage={postInfo.limit}
-            totalItemsCount={postInfo.filteredPostCount}
-            onChange={(page: number) => handlePage(page)}
-            nextPageText=">"
-            prevPageText="<"
-            firstPageText="<<"
-            lastPageText=">>"
-            itemClass="page-item"
-            linkClass="page-link"
-            activeClass="pageItemActive active"
-            activeLinkClass="pageLInkActive disabled"
-            itemClassNext="symbol"
-            itemClassLast="symbol"
-            itemClassFirst="symbol"
-            itemClassPrev="symbol"
-          />
+          {postInfo?.posts.length > 1 && (
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={postInfo.limit}
+              totalItemsCount={postInfo.filteredPostCount}
+              onChange={(page: number) => handlePage(page)}
+              nextPageText=">"
+              prevPageText="<"
+              firstPageText="<<"
+              lastPageText=">>"
+              itemClass="page-item"
+              linkClass="page-link"
+              activeClass="pageItemActive active"
+              activeLinkClass="pageLInkActive disabled"
+              itemClassNext="symbol"
+              itemClassLast="symbol"
+              itemClassFirst="symbol"
+              itemClassPrev="symbol"
+            />
+          )}
         </div>
-      </>
+      </div>
     );
   }
 

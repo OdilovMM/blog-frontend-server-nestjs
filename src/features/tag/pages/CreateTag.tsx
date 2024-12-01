@@ -21,25 +21,35 @@ const CreateTag = () => {
   const isSubmitDisabled = title.trim() === '';
 
   return (
-    <>
-      <h2>Create a tag for your post</h2>
+    <div className="flex flex-col w-[400px] max-w-[90%] mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+      <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+        Create a Tag
+      </h2>
 
-      <label htmlFor="">Tag Title</label>
+      <label htmlFor="title" className="text-gray-700 text-sm font-medium mb-2">
+        Tag Title
+      </label>
       <input
         type="text"
+        id="title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className="p-3 border border-gray-300 rounded-md mb-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        placeholder="Enter tag title"
       />
-      <br />
-      <br />
+
       <button
         onClick={handleSubmit}
-        style={{ padding: '10px' }}
+        className={`w-full p-3 text-white rounded-md ${
+          isSubmitDisabled
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-blue-600 hover:bg-blue-700'
+        }`}
         disabled={isSubmitDisabled}
       >
-        Add
+        Add Tag
       </button>
-    </>
+    </div>
   );
 };
 

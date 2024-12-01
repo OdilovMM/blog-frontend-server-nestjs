@@ -44,17 +44,17 @@ const PostCard = ({
             className="avatar"
           />
         </div>
-        <p className="article-body">{post.excerpt}</p>
+        {/* <p className="article-body">{post.excerpt}</p> */}
         <div className="article-meta">
           <span>
-            <BiCategory className="icons" /> &nbsp;
+            <BiCategory className="icons" color="blue" /> &nbsp;
             <Link to={`/search/?category=${post.category._id}&page=1`}>
               {post.category.title}
             </Link>
           </span>
           {post.tags.length > 0 && (
             <span>
-              <BsTags className="icons" /> &nbsp;
+              <BsTags className="icons" color="blue" /> &nbsp;
               {post.tags.map((tag, index) => (
                 <Link
                   to={`/search/?tags=${tag._id}}&page=1`}

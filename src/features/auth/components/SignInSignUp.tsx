@@ -27,53 +27,84 @@ const SignInSignUp = ({ onSignIn, onSignUp }: AuthPageProps) => {
   };
 
   return (
-    <div>
-      <h1>{isSignIn ? 'Sign In' : 'Sign Up'}</h1>
-      <form onSubmit={handleSubmit}>
-        {!isSignIn && (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-600">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center mb-6">
+          {isSignIn ? 'Sign In' : 'Sign Up'}
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {!isSignIn && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Enter your name"
+              />
+            </div>
+          )}
           <div>
-            <label htmlFor="name">Name:</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
-              type="text"
-              autoComplete="sample@gmail.com"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Enter your email"
             />
           </div>
-        )}
-        <div>
-          <label htmlFor="name">Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="name">Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        {!isSignIn && (
           <div>
-            <label htmlFor="name">Avatar:</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
-              type="text"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="Enter your password"
             />
           </div>
-        )}
-        <button type="submit">{isSignIn ? 'Login' : 'Register'}</button>
-      </form>
-      <p>{isSignIn ? "Don't have an account?" : 'Already have an account?'}</p>
-      <button type="button" onClick={() => setIsSignIn(!isSignIn)}>
-        {isSignIn ? 'Register here' : 'Login here'}
-      </button>
+          {!isSignIn && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Avatar
+              </label>
+              <input
+                type="text"
+                value={avatar}
+                onChange={(e) => setAvatar(e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Avatar URL"
+              />
+            </div>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition focus:outline-none focus:ring focus:ring-indigo-300"
+          >
+            {isSignIn ? 'Login' : 'Register'}
+          </button>
+        </form>
+        <div className="mt-4 text-center text-sm text-gray-600">
+          <p>
+            {isSignIn ? "Don't have an account?" : 'Already have an account?'}
+          </p>
+          <button
+            type="button"
+            onClick={() => setIsSignIn(!isSignIn)}
+            className="text-indigo-600 font-medium hover:underline"
+          >
+            {isSignIn ? 'Register here' : 'Login here'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

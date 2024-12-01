@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../../../assets/logo.png';
 import DesktopMenu from './menus/DesktopMenu';
 import DrawerMenu from './menus/DrawerMenu';
 import { selectTheme, changeTheme } from '../slice/themeSlice';
@@ -9,7 +8,7 @@ import SearchDialogue from './SearchDialogue';
 import { selectCurrentUser } from '../../auth/slice/authSlice';
 import { BsMoonFill, BsSunFill } from 'react-icons/bs';
 
-const Header = () => {
+const Header: React.FC = () => {
   const { user } = useAppSelector(selectCurrentUser);
   const darkMode = useAppSelector(selectTheme);
   const dispatch = useAppDispatch();
@@ -22,37 +21,41 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <div className="logo">
-        <NavLink to="/">
-          <img src={logo} alt="blog" width={50} />
+    <header
+      className={`flex justify-between items-center px-4 py-3 shadow-md ${
+        darkMode ? 'bg-gray-900' : 'bg-white'
+      }`}
+    >
+      {/* Logo */}
+      <div className="flex items-center">
+        <NavLink
+          to="/"
+          className={`text-xl font-bold ${dark ? 'text-gray' : 'text-white'}`}
+        >
+          Odilov's Blog
         </NavLink>
       </div>
 
-      <div className="menu">
+      {/* Menu and Actions */}
+      <div className="menu flex items-center  space-x-4">
         <SearchDialogue />
         <DesktopMenu user={user} />
-        <span className="sp-border cursor-pointer">
-          <input
-            type="checkbox"
-            id="dark"
-            name="dark"
-            checked={dark}
-            onChange={handleChangeTheme}
-            style={{ display: 'none' }}
-          />
-          <label className="cursor-pointer" htmlFor="dark">
-            {dark ? (
-              <BsMoonFill style={{ cursor: 'pointer' }} />
-            ) : (
-              <BsSunFill style={{ cursor: 'pointer' }} />
-            )}
-          </label>
-        </span>
+        <button
+          className={`p-2 rounded-full w-[35px] ${
+            dark ? 'bg-gray-800' : 'bg-gray-100'
+          } hover:bg-gray-200 dark:hover:bg-gray-700`}
+          onClick={handleChangeTheme}
+          aria-label="Toggle Theme"
+        >
+          {dark ? (
+            <BsSunFill className="text-gray-300" />
+          ) : (
+            <BsMoonFill className="text-yellow-600" />
+          )}
+        </button>
         <DrawerMenu user={user} />
       </div>
     </header>
   );
 };
-
 export default Header;
